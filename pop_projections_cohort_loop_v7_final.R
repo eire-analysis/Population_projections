@@ -235,42 +235,9 @@ mig1$shr_mig[mig1$age>44 & mig1$age<=64] <- (filter(migration_total, Age.Group==
 mig1$shr_mig[mig1$age>=65]<- (filter(migration_total, Age.Group=="65 years and over")$shr)/6
 mig_shares <- mig1
 
-##################################################
-#Step.6 - Creat dataframes to track progress
-##################################################
 
-#save a dataframe to record births per year
-birthsm <- c(0)
-birthsf <- c(0)
-birthsm_crude <- c(0)
-birthsf_crude <- c(0)
-year <- c(0)
-all_b <- cbind(year,birthsm,birthsf,birthsm_crude,birthsf_crude)
-
-#save a dataframe to record the fertility rate
-asfr_1 <-c(0)
-df_asfr <- cbind(year,asfr_1)
-
-#save a dataframe to record net migration 
-net_mig <-c(0)
-all_mig <- cbind(year,net_mig)
-
-#save a dataframe to record deaths
-age <- c(0:120)
-m_deaths <- as.data.frame(age)
-f_deaths <- as.data.frame(age)
-
-#save a dataframe to record population
-age <- c(0:120)
-m_pop_all <- as.data.frame(age)
-f_pop_all <- as.data.frame(age)
-
-##################################################
-#Step.7 - Iterative procedure
-##################################################
-
-
-#Gauss-Markov Net Migration
+#Gauss-Markov Chain - Net Migration
+#Possibilities of using medium term economic growth to determine net migration?
 
 starting = 30000
 net_mig=0
@@ -312,6 +279,40 @@ net_mig_gm <- rbind(net_mig_gm,net_mig_add)
 
 }
 net_mig_gm <- as.data.frame(net_mig_gm)
+
+##################################################
+#Step.6 - Creat dataframes to track progress
+##################################################
+
+#save a dataframe to record births per year
+birthsm <- c(0)
+birthsf <- c(0)
+birthsm_crude <- c(0)
+birthsf_crude <- c(0)
+year <- c(0)
+all_b <- cbind(year,birthsm,birthsf,birthsm_crude,birthsf_crude)
+
+#save a dataframe to record the fertility rate
+asfr_1 <-c(0)
+df_asfr <- cbind(year,asfr_1)
+
+#save a dataframe to record net migration 
+net_mig <-c(0)
+all_mig <- cbind(year,net_mig)
+
+#save a dataframe to record deaths
+age <- c(0:120)
+m_deaths <- as.data.frame(age)
+f_deaths <- as.data.frame(age)
+
+#save a dataframe to record population
+age <- c(0:120)
+m_pop_all <- as.data.frame(age)
+f_pop_all <- as.data.frame(age)
+
+##################################################
+#Step.7 - Iterative procedure
+##################################################
 
 #Starting in 2016, iterate each year
 
